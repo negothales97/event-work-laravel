@@ -19,7 +19,6 @@ class User extends BaseAuthModel
         'uuid',
         'name',
         'email',
-        'phone',
         'company_id',
         'role_id',
         'password',
@@ -32,5 +31,9 @@ class User extends BaseAuthModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+    public function company()
+    {
+        return $this->belongsTo(Company::class);
     }
 }

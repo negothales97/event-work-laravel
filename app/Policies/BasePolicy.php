@@ -2,7 +2,6 @@
 
 namespace App\Policies;
 
-use App\Models\Log;
 use Illuminate\Support\Str;
 use App\Exceptions\PolicyServiceException;
 use App\Repositories\Contracts\RoleRepository;
@@ -62,13 +61,6 @@ class BasePolicy
         $function = $trace[count($trace) - 1]['function'];
         $action = strtoupper(Str::snake($function) . '_' . $title);
 
-        $log = Log::create([
-            'code' => $code,
-            'data' => json_encode(compact('message', 'code', 'idEntity')),
-            'log_level' => 'INFO',
-            'exception' => $action,
-            'user_id' => $idUser
-        ]);
 
         throw new PolicyServiceException($message, $code);
     }

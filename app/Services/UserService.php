@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Criteria\UserCriteria;
+use App\Repositories\Contracts\RoleRepository;
 use Illuminate\Support\Facades\DB;
 use App\Services\Responses\ServiceResponse;
 use App\Repositories\Contracts\UserRepository;
@@ -53,10 +54,14 @@ class UserService extends BaseService implements UserServiceInterface
      *
      * @return ServiceResponse
      */
-    public function store(array $data): ServiceResponse
+    public function create(array $data): ServiceResponse
     {
         DB::beginTransaction();
         try {
+            if (!isset($data['role_id'])) {
+                $role = app(RoleRepository::class)->findWhere(['name' => 'admin'])->first();
+                $data['role_id'] = $role->uuid;
+            }
             $user = $this->userRepository->create($data);
         } catch (\Throwable $e) {
             DB::rollBack();

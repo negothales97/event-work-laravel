@@ -2,10 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Log;
-use Illuminate\Support\Str;
 use App\Services\Responses\InternalError;
-use App\Exceptions\PolicyServiceException;
 use App\Services\Responses\ServiceResponse;
 
 class BaseService
@@ -26,24 +23,16 @@ class BaseService
         $logLevel = 'ERROR'
     ): ServiceResponse {
 
-        $log = Log::create([
-            'code' => $code,
-            'data' => json_encode($data),
-            'log_level' => $logLevel,
-            'exception' => $e,
-            'user_id' => user('id')
-        ]);
 
         return new ServiceResponse(
             false,
             "Ocorreu um erro inesperado. Por favor, tente novamente",
             $data,
-            $log->uuid,
+            null,
             [
                 new InternalError(
                     $e->getMessage(),
                     $code,
-                    $log->uuid
                 )
             ]
         );
