@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ResetPasswordController;
 
 /*
@@ -31,12 +30,9 @@ Route::group([
     Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 });
 
-Route::group([
-    'middleware' => 'auth:sanctum'
-], function () {
+Route::group([], function () {
     Route::apiResources([
         'users' => UserController::class,
-        'categories' => CategoryController::class,
     ]);
 });
 

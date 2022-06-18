@@ -14,8 +14,7 @@ class CreateDocumentsTable extends Migration
     public function up()
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid');
+            $table->uuid('uuid')->primary();
             $table->string('file');
             $table->integer('documentable_id');
             $table->string('documentable_type');

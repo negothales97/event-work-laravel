@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateAdminsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,11 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->uuid('uuid');
+        Schema::create('admins', function (Blueprint $table) {
+            $table->uuid('uuid')->primary();
             $table->string('name');
-            $table->string('color');
-            $table->integer('status')->default(1);
-
-            $table->foreignId('parent_id')
-                ->nullable()
-                ->constrained('categories')
-                ->onDelete('cascade');
-
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -37,6 +30,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('admins');
     }
 }

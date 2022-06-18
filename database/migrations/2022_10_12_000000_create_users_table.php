@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Company;
+use App\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -19,10 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('phone');
-            $table->foreignId('role_id')
-                ->constrained('roles');
-            $table->rememberToken();
+            $table->foreignIdFor(Role::class);
+            $table->foreignIdFor(Company::class);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -26,10 +27,9 @@ class UserFactory extends Factory
         return [
             'name' => $this->faker->name,
             'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->phoneNumber,
             'role_id' => Role::factory(),
-            'password' => 'password', // password
-            'remember_token' => Str::random(10),
+            'company_id' => Company::factory(),
+            'password' => bcrypt('passsword'),
         ];
     }
 }

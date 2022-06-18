@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
+use App\Models\Company;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -19,27 +20,11 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'uuid' => Str::uuid(),
-                'name' => 'Renan Rodrigues',
-                'email' => 'renan@imaxinformatica.com.br',
-                'phone' => '(99)999999999',
-                'role_id' => 1,
-                'password' => Hash::make('.Welcome09'),
-            ],
-            [
-                'uuid' => Str::uuid(),
                 'name' => 'Thales Serra',
-                'email' => 'thales@imaxinformatica.com.br',
-                'phone' => '(99)999999999',
-                'role_id' => 1,
-                'password' => Hash::make('.Welcome09'),
-            ],
-            [
-                'uuid' => Str::uuid(),
-                'name' => 'Lucas Borelli',
-                'email' => 'lucas@imaxinformatica.com.br',
-                'phone' => '(99)999999999',
-                'role_id' => 1,
-                'password' => Hash::make('.Welcome09'),
+                'email' => 'admin@email.com.br',
+                'company_id' => Company::first()->uuid,
+                'role_id' => Role::first()->uuid,
+                'password' => bcrypt('password'),
             ],
         ]);
     }
