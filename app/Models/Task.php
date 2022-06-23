@@ -6,7 +6,7 @@ class Task extends BaseModel
 {
     protected $fillable = [
         'uuid',
-        'name',
+        'title',
         'description',
         'priority',
         'status',

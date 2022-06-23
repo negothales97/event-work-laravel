@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->uuid('uuid')->primary();
+            $table->string('title');
             $table->text('description');
             $table->enum('priority', [
                 'low',
@@ -28,7 +29,7 @@ class CreateTasksTable extends Migration
                 'open',
                 'solving',
                 'resolved'
-            ]);
+            ])->default('open');
             $table->foreignIdFor(User::class);
             $table->foreignIdFor(Company::class);
             $table->foreignIdFor(Admin::class)->nullable();

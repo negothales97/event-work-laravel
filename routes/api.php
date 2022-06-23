@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,10 +31,11 @@ Route::group([
     Route::post('reset-password', [ResetPasswordController::class, 'resetPassword'])->name('reset-password');
 });
 
-Route::group([], function () {
-    Route::apiResources([
-        'users' => UserController::class,
-    ]);
-});
+// Route::group(['middle'], function () {
+Route::apiResources([
+    'users' => UserController::class,
+    'tasks' => TaskController::class
+]);
+// });
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
